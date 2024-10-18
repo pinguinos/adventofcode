@@ -1,5 +1,5 @@
 # The numbers in each line can now be a spelled out numbers instead of digit.
-# Big simplification: this code did not handle eleve, twelve, thirtheen, ... , twenty, ... hundred 
+# Big simplification: this code did not handle eleven, twelve, thirteen, ... , twenty, ... hundred 
 
 DIGIT_MAP = {
     "zero" : 0,
@@ -13,50 +13,38 @@ DIGIT_MAP = {
     "eight" : 8,
     "nine" : 9
 }
+ 
+def findFirstNumber(line, digitMap):
+
+    for index, c in enumerate(line):
+        if c.isnumeric():
+            return int(c)
+        else:
+            for digitStr in digitMap:
+                if line.startswith(digitStr, index):
+                    return digitMap[digitStr]
+    return 0
+
+
 
 def main():
 
-    sum = 0
-
     f = open('day1part1.dat', 'r')
+
+    DIGIT_MAP_REVERSED = {}
+    for (k, v) in DIGIT_MAP.items():
+        DIGIT_MAP_REVERSED["".join(reversed(k))] = v
+        
+    sum = 0
     for line in f:
 
-        num = 0
-
         # find first number
-        for index, c in enumerate(line):
-            if c.isnumeric():
-                num += int(c) * 10
-                break
-            else:
-                foundDigit = False
-                for digitStr in DIGIT_MAP:
-                    if line.startswith(digitStr, index):
-                        num += DIGIT_MAP[digitStr]*10
-                        foundDigit = True
-                        break 
-                if foundDigit:
-                    break 
+        sum += findFirstNumber(line, DIGIT_MAP) * 10
 
         # find last number
         lineR = "".join(reversed(line))
-        for index, c in enumerate(lineR):
-            if c.isnumeric():
-                num += int(c)
-                break
-            else:
-                foundDigit = False
-                for digitStr in DIGIT_MAP:
-                    digitStrR = "".join(reversed(digitStr))
-                    if lineR.startswith(digitStrR, index):
-                        num += DIGIT_MAP[digitStr]
-                        foundDigit = True
-                        break
-                if foundDigit:
-                    break
+        sum += findFirstNumber(lineR, DIGIT_MAP_REVERSED)
 
-        print("line = {} num = {} ".format(line, num))
-        sum += num
     print("Total sum = {}".format(sum))
 
 main()
