@@ -3,7 +3,7 @@
 
 def main():
 
-    f = open('day1part1.dat', 'r')
+    f = open('input/day1part1.dat', 'r')
     sum = 0
     for line in f:
         
