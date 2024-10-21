@@ -7,7 +7,7 @@ def main():
 
     # load input graph into hashmap
     hashmapInputGraph = {}
-    f = open('input/day8part1.dat', 'r')
+    f = open('input/day8.dat', 'r')
     for line in f:
         tokens = line.split(" = ")
         pnode = tokens[0]

@@ -29,7 +29,7 @@ def findFirstNumber(line, digitMap):
 
 def main():
 
-    f = open('input/day1part1.dat', 'r')
+    f = open('input/day1.dat', 'r')
 
     DIGIT_MAP_REVERSED = {}
     for (k, v) in DIGIT_MAP.items():
