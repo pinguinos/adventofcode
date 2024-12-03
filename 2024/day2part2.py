@@ -6,8 +6,12 @@ def main():
     count = 0
     for line in lines:
         tokens = line.strip().split()
-        if isSafe(tokens):
-            count += 1
+        for i in range(0, len(tokens), 1):
+            newTokens = tokens[:i] + tokens[i+1:] #remove element at index i
+            if isSafe(newTokens):
+                count += 1
+                break
+
     print("Result count = ", count)
     return
 
